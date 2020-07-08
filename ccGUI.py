@@ -20,7 +20,7 @@ iconPA = []
 if __name__ == '__main__': #code only executed to run as a program not when simply imported as a module
 	root = Tk()
 	root.geometry('375x375')
-	root.wm_title("CarbonCamera")
+	root.wm_title("Food Identifier")
 	root.resizable(width=False, height=False)
 
 	def exit_handler():
@@ -57,7 +57,7 @@ if __name__ == '__main__': #code only executed to run as a program not when simp
 	upload = Image.open('placeholderImg.png').resize((220, 220), Image.ANTIALIAS) #scale image, keep ratio
 	render = ImageTk.PhotoImage(upload)
 
-	titleLabel = Label(root, text="CarbonCamera\n", font=LARGE_FONT)
+	titleLabel = Label(root, text="Food Identifier\n", font=LARGE_FONT)
 	imgLabel = Label(root, image=render)
 	uploadButton = Button(root, text="Upload image..", command=open)
 	spacerLabel = Label(root, text='')
