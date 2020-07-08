@@ -91,8 +91,8 @@ def main():
 	data_sets = load_data(None, None)
 	print(data_sets['images_train'].shape)
 	print(data_sets['labels_train'].shape)
-  	print(data_sets['images_test'].shape)
-  	print(data_sets['labels_test'].shape)
+	print(data_sets['images_test'].shape)
+	print(data_sets['labels_test'].shape)
 
 if __name__ == '__main__':
 	main()
