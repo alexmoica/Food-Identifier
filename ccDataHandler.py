@@ -1,10 +1,10 @@
 import numpy as np
 import tensorflow as tf
-import cPickle
+import pickle
 
 def unpickle(file):
 	with open(file, 'rb') as f:
-		dict = cPickle.load(f)
+		dict = pickle.load(f, encoding='latin1')
 		if (file == 'cifar-100-python/meta'):
 			x = (dict['fine_label_names'])
 			return x
