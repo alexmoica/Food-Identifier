@@ -5,4 +5,4 @@ Due to size limitations, the CIFAR-100 training data cannot be included in this 
 
 To run the program execute the `ccGUI.py` file
 
-Made with Python 2.7.
+Updated to use python 3
