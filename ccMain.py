@@ -23,6 +23,7 @@ def startModel(flag, PA):
 	# -----------------------------------------------------------------------------
 
 	# Define input placeholders
+	tf.compat.v1.disable_eager_execution()
 	images_placeholder = tf.compat.v1.placeholder(tf.float32, shape=[None, 3072])
 	labels_placeholder = tf.compat.v1.placeholder(tf.int64, shape=[None])
 
