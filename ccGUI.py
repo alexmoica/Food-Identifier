@@ -1,6 +1,6 @@
-from Tkinter import *
+from tkinter import *
+from tkinter import filedialog
 from PIL import Image, ImageTk
-import tkFileDialog
 import os
 import ccMain
 import ccDataHandler
@@ -31,7 +31,7 @@ if __name__ == '__main__': #code only executed to run as a program not when simp
 		global iconPA
 
 		#open file explorer for tkinter
-		img = tkFileDialog.askopenfilename(initialdir = os.path.dirname(os.path.abspath(__file__)),title = "Select an image to upload to model",filetypes = (("jpeg files","*.jpg *.jpeg"),))
+		img = filedialog.askopenfilename(initialdir = os.path.dirname(os.path.abspath(__file__)),title = "Select an image to upload to model",filetypes = (("jpeg files","*.jpg *.jpeg"),))
 		
 		#use PIL to convert image to usable format
 		selection = ImageTk.PhotoImage(Image.open(img).resize((220, 220), Image.ANTIALIAS))
