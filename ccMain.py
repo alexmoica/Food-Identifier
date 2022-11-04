@@ -4,12 +4,12 @@ import time
 import ccDataHandler
 
 def startModel(flag, PA):
-	beginTime = time.time()
+	beginTime = time.time() #start timer to find time elapsed in identifying image
 
-	# Parameter definitions
-	batch_size = 100
-	learning_rate = 0.005
-	max_steps = 1000
+	# Hyperparameter definitions
+	batch_size = 100 #number of training samples used for a training pass. Large batch = less cost due to lower number of updates needed, increasing batch is akin to decreasing learning rate. Small batch = more generalized (perform better on new/unseen data)
+	learning_rate = 0.005 #between 0 and 1, how quickly the model is trained. Smaller = smaller changes to weights, longer but more accurate. Larger = larger changes to weights, fast but less accurate 
+	max_steps = 1000 #number of forward and backward passed on a batch. Larger max steps = overfitting, smaller max steps = uderfitting
 
 	# Prepare data
 	data_sets = ccDataHandler.load_data(flag, PA)
@@ -74,5 +74,5 @@ def startModel(flag, PA):
 				print("-"*30)
 
 	
-	endTime = time.time()
+	endTime = time.time() #stop timer
 	print('Total time: {:5.2f}s'.format(endTime - beginTime))
