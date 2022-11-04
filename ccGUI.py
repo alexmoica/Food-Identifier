@@ -11,14 +11,14 @@ import numpy as np
 LARGE_FONT = ('Verdana 15 underline')
 BOLD_FONT = ('Verdana 9 bold')
 global userFlag
-userFlag = 0
+userFlag = 0 #flag for if user uploaded an image
 
 global iconPA
 iconPA = []
 
 if __name__ == '__main__': #code only executed to run as a program not when simply imported as a module
 	root = Tk()
-	root.geometry('375x375')
+	root.geometry('375x375') #window size
 	root.wm_title("Food Identifier")
 	root.resizable(width=False, height=False)
 
@@ -32,7 +32,7 @@ if __name__ == '__main__': #code only executed to run as a program not when simp
 		#open file explorer for tkinter
 		img = filedialog.askopenfilename(initialdir = os.path.dirname(os.path.abspath(__file__)),title = "Select an image to upload to model",filetypes = (("jpeg files","*.jpg *.jpeg"),))
 		
-		#use PIL to convert image to usable format
+		#pre-processing image: use PIL to convert image to usable format
 		selection = ImageTk.PhotoImage(Image.open(img).resize((220, 220), Image.ANTIALIAS))
 		imgLabel.config(image=selection)
 		imgLabel.photo_ref=selection #keep reference to new image
@@ -51,17 +51,19 @@ if __name__ == '__main__': #code only executed to run as a program not when simp
 				tempArray.append(iconPA[j][i])
 
 		iconPA = tempArray
-		userFlag = 1
+		userFlag = 1 #image uploaded
 
 	upload = Image.open('placeholderImg.png').resize((220, 220), Image.ANTIALIAS) #scale image, keep ratio
 	render = ImageTk.PhotoImage(upload)
 
+	#equivalent logic to creating HTML elements
 	titleLabel = Label(root, text="Food Identifier\n", font=LARGE_FONT)
 	imgLabel = Label(root, image=render)
 	uploadButton = Button(root, text="Upload image..", command=open)
 	spacerLabel = Label(root, text='')
 	runButton = Button(root, text="Run model", activeforeground="green", fg="green", font=BOLD_FONT, command=lambda: ccMain.startModel(userFlag, iconPA))
 
+	#place elements in the tkinter window, pack just places elements on top of each other like HTML would without any styling
 	titleLabel.pack()
 	uploadButton.pack()
 	imgLabel.pack()
