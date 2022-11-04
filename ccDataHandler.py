@@ -10,7 +10,7 @@ def unpickle(file):
 			x = (dict['fine_label_names'])
 			return x
 		else:
-			x = dict['data'] #iamge data
+			x = dict['data'] #image data
 			y = (dict['fine_labels']) #each image contains a fine label (class that it belongs to, e.g. apple) and a coarse label (superclass it belongs to, e.g. fruits and vegetables)
 			return x, y
 
