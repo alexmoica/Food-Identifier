@@ -2,15 +2,16 @@ import numpy as np
 import tensorflow as tf
 import pickle
 
+#convert from bytestream to object
 def unpickle(file):
-	with open(file, 'rb') as f:
-		dict = pickle.load(f, encoding='latin1')
+	with open(file, 'rb') as f: #files are in byte stream
+		dict = pickle.load(f, encoding='latin1') #convert from byte stream to object
 		if (file == 'cifar-100-python/meta'):
 			x = (dict['fine_label_names'])
 			return x
 		else:
-			x = dict['data']
-			y = (dict['fine_labels'])
+			x = dict['data'] #iamge data
+			y = (dict['fine_labels']) #each image contains a fine label (class that it belongs to, e.g. apple) and a coarse label (superclass it belongs to, e.g. fruits and vegetables)
 			return x, y
 
 def load_data(flag, PA):
@@ -22,7 +23,7 @@ def load_data(flag, PA):
 	data_train, fine_train = unpickle(trainFile)
 	data_test, fine_test = unpickle(testFile)
 	meta = unpickle(metaFile)
-	nameIndex = ['apple', 'mushroom', 'orange', 'pear', 'sweet_pepper']
+	nameIndex = ['apple', 'mushroom', 'orange', 'pear', 'sweet_pepper'] #train model on only these fine labels
 	targetIndex = [meta.index('apple'), meta.index('mushroom'), meta.index('orange'), meta.index('pear'), meta.index('sweet_pepper')]
 
 	data_train_f = [] #data
