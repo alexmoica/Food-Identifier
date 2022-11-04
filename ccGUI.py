@@ -3,7 +3,6 @@ from tkinter import filedialog
 from PIL import Image, ImageTk
 import os
 import ccMain
-import ccDataHandler
 import cv2
 import atexit
 import numpy as np
