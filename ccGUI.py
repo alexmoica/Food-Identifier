@@ -19,9 +19,6 @@ if __name__ == '__main__': #code only executed to run as a program not when simp
 		imgIcon = Image.open(img).resize((32, 32), Image.ANTIALIAS) #icon image for passing into ML algorithm
 		imgIcon.save('userIcon.jpg','JPEG')
 
-		iconPA = cv2.imread('userIcon.jpg')
-		iconPA = cv2.cvtColor(iconPA, cv2.COLOR_BGR2RGB) #cv2.imread converts image to BGR, this converts it back to RGB
-		
 		iconPA = np.concatenate(np.array(imgIcon))
 
 		tempArray = []
