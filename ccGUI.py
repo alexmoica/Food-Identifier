@@ -1,15 +1,7 @@
-from tkinter import *
-from tkinter import filedialog
-from PIL import Image, ImageTk
-import os
+from PIL import Image
 import ccMain
-import cv2
-import atexit
 import numpy as np
 
-#define custom typesets
-LARGE_FONT = ('Verdana 15 underline')
-BOLD_FONT = ('Verdana 9 bold')
 global userFlag
 userFlag = 0 #flag for if user uploaded an image
 
@@ -17,33 +9,20 @@ global iconPA
 iconPA = []
 
 if __name__ == '__main__': #code only executed to run as a program not when simply imported as a module
-	root = Tk()
-	root.geometry('375x375') #window size
-	root.wm_title("Food Identifier")
-	root.resizable(width=False, height=False)
-
-	def exit_handler():
-		os.remove('userIcon.jpg') #remove icon image at exit
-
 	def open():
 		global userFlag #use global value of userFlag
 		global iconPA
 
-		#open file explorer for tkinter
-		img = filedialog.askopenfilename(initialdir = os.path.dirname(os.path.abspath(__file__)),title = "Select an image to upload to model",filetypes = (("jpeg files","*.jpg *.jpeg"),))
-		
-		#pre-processing image: use PIL to convert image to usable format
-		selection = ImageTk.PhotoImage(Image.open(img).resize((220, 220), Image.ANTIALIAS))
-		imgLabel.config(image=selection)
-		imgLabel.photo_ref=selection #keep reference to new image
+		img = "orange.jpeg" #input image to be analysed
 
+		#pre-processing image: use PIL to convert image to usable format
 		imgIcon = Image.open(img).resize((32, 32), Image.ANTIALIAS) #icon image for passing into ML algorithm
 		imgIcon.save('userIcon.jpg','JPEG')
 
 		iconPA = cv2.imread('userIcon.jpg')
 		iconPA = cv2.cvtColor(iconPA, cv2.COLOR_BGR2RGB) #cv2.imread converts image to BGR, this converts it back to RGB
 		
-		iconPA = np.concatenate(iconPA)
+		iconPA = np.concatenate(np.array(imgIcon))
 
 		tempArray = []
 		for i in range(3):
@@ -53,23 +32,6 @@ if __name__ == '__main__': #code only executed to run as a program not when simp
 		iconPA = tempArray
 		userFlag = 1 #image uploaded
 
-	upload = Image.open('placeholderImg.png').resize((220, 220), Image.ANTIALIAS) #scale image, keep ratio
-	render = ImageTk.PhotoImage(upload)
+		ccMain.startModel(userFlag, iconPA)
 
-	#equivalent logic to creating HTML elements
-	titleLabel = Label(root, text="Food Identifier\n", font=LARGE_FONT)
-	imgLabel = Label(root, image=render)
-	uploadButton = Button(root, text="Upload image..", command=open)
-	spacerLabel = Label(root, text='')
-	runButton = Button(root, text="Run model", activeforeground="green", fg="green", font=BOLD_FONT, command=lambda: ccMain.startModel(userFlag, iconPA))
-
-	#place elements in the tkinter window, pack just places elements on top of each other like HTML would without any styling
-	titleLabel.pack()
-	uploadButton.pack()
-	imgLabel.pack()
-	spacerLabel.pack()
-	runButton.pack()
-
-	atexit.register(exit_handler) #define functionality at program exit
-
-	root.mainloop()
+	open()
