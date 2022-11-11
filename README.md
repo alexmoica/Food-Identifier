@@ -5,6 +5,6 @@ Due to size limitations, the CIFAR-100 training data cannot be included in this 
 
 You might need to pip install the following packages: numpy, tensorflow, pillow
 
-To run the program execute the `ccGUI.py` file using python3 ccGUI.py
+To run the program execute the `ccGUI.py` file using `python3 ccGUI.py`
 
 Updated to use python 3
